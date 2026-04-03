@@ -15,8 +15,14 @@
 ##########
 
 import json
+import socket
 import sys
+
 import requests
+from urllib3.util.connection import allowed_gai_family
+
+# Force IPv4 — IPv6 DNS entries resolve but connections hang
+requests.packages.urllib3.util.connection.allowed_gai_family = lambda: socket.AF_INET
 
 # Check arguments
 if len(sys.argv) > 3:
